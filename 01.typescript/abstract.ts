@@ -1,4 +1,4 @@
-class Geometry {
+abstract class Geometry {
   protected area: number;
   protected perimeter: number;
 
@@ -11,38 +11,33 @@ class Geometry {
 class Square extends Geometry {
   private side: number;
 
+  private calculateAreaAndPerimeter() {
+    this.perimeter = this.side * 4;
+    this.area = this.side * this.side;
+  }
+
   constructor(side: number) {
     super();
 
     this.side = side;
-    this.area = this.side * this.side;
-    this.perimeter = this.side * 4;
+    this.calculateAreaAndPerimeter();
   }
 
   set Side(value: number) {
-    console.log('set Side');
-
     this.side = value;
-    this.area = this.side * this.side;
+    this.calculateAreaAndPerimeter();
   }
 
   get Side() {
-    console.log('get Side');
-
     return this.side;
   }
 
   get Area() {
-    console.log('get Area');
-
     return this.area;
   }
 }
 
 const square = new Square(2);
 
-console.log(`Side: ${square.Side} - Area: ${square.Area}`);
-
-square.Side = 10;
-
-console.log(`Side: ${square.Side} - Area: ${square.Area}`);
+console.log(square.Side);
+console.log(square.Area);
