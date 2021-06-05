@@ -1,15 +1,15 @@
+// TypeScript Mixins: https://www.typescriptlang.org/docs/handbook/mixins.html
+
 // deno-lint-ignore no-explicit-any
 function applyMixins(derivedCtor: any, baseCtors: any[]) {
   baseCtors.forEach(baseCtor => {
     Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
-      const baseCtorName = Object.getOwnPropertyDescriptor(
-        baseCtor.prototype,
-        name
+      Object.defineProperty(
+        derivedCtor.prototype,
+        name,
+        Object.getOwnPropertyDescriptor(baseCtor.prototype, name) ||
+          Object.create(null)
       );
-
-      if (!baseCtorName) return;
-
-      Object.defineProperty(derivedCtor.prototype, name, baseCtorName);
     });
   });
 }
