@@ -7,6 +7,7 @@
 - [ts-node](https://typestrong.org/ts-node)
   - [Installation](https://typestrong.org/ts-node/docs/installation)
 - [ESLint](https://eslint.org)
+  - [no-unused-vars](https://typescript-eslint.io/rules/no-unused-vars)
 - [Express](https://expressjs.com/ko)
   - [Installing](https://expressjs.com/en/starter/installing.html)
 - [nodemon](https://nodemon.io)
