@@ -9,3 +9,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Provider {
+  Local
+  Kakao
+  Naver
+}
+
+model User {
+  userId   Int     @id @default(autoincrement())
+  email    String  @unique @db.VarChar(30)
+  nickname String  @unique @db.VarChar(12)
+  password String? @db.Text
+
+  provider Provider @default(Local)
+  posts    Post[]
+}
+
+model Post {
+  postId    Int      @id @default(autoincrement())
+  authorId  Int
+  title     String   @db.VarChar(32)
+  image     String   @db.Text
+  content   String   @db.VarChar(256)
+  isPublish Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User @relation(fields: [authorId], references: [userId], onDelete: Cascade)
+}
