@@ -12,6 +12,8 @@
   - [Installing](https://expressjs.com/en/starter/installing.html)
 - [nodemon](https://nodemon.io)
 - [morgan](https://github.com/expressjs/morgan)
+- [PostgreSQL](https://www.postgresql.org)
+  - [Downloads](https://www.postgresql.org/download)
 - [Prisma](https://www.prisma.io)
   - [Quickstart](https://www.prisma.io/docs/getting-started/quickstart)
   - [Relational databases](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres)
