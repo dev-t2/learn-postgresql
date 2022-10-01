@@ -14,3 +14,4 @@
 - [morgan](https://github.com/expressjs/morgan)
 - [Prisma](https://www.prisma.io)
   - [Quickstart](https://www.prisma.io/docs/getting-started/quickstart)
+  - [Relational databases](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres)
