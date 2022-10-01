@@ -12,3 +12,5 @@
   - [Installing](https://expressjs.com/en/starter/installing.html)
 - [nodemon](https://nodemon.io)
 - [morgan](https://github.com/expressjs/morgan)
+- [Prisma](https://www.prisma.io)
+  - [Quickstart](https://www.prisma.io/docs/getting-started/quickstart)
