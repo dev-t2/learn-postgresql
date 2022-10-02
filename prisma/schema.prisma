@@ -12,8 +12,8 @@ datasource db {
 
 model User {
   id       Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(30)
-  nickname String @unique @db.VarChar(10)
+  email    String @unique @db.VarChar(50)
+  nickname String @unique @db.VarChar(30)
   password String
   posts    Post[]
 }

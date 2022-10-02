@@ -22,4 +22,5 @@
   - [Install Prisma Client](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/install-prisma-client-typescript-postgres)
   - [Querying the database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-typescript-postgres)
   - [CRUD](https://www.prisma.io/docs/concepts/components/prisma-client/crud)
+  - [Prisma CLI reference](https://www.prisma.io/docs/reference/api-reference/command-reference)
 - [Faker](https://github.com/faker-js/faker)

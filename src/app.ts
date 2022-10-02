@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import { PrismaClient } from '@prisma/client';
+import { faker } from '@faker-js/faker';
 
 const app = express();
 
@@ -10,6 +11,32 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(express.json());
 
 const prisma = new PrismaClient();
+
+interface ICreateFakerUsersRequest extends Request {
+  body: { count: number };
+}
+
+app.post('/faker/users', async (req: ICreateFakerUsersRequest, res) => {
+  const { count } = req.body;
+
+  try {
+    for (let i = 0; i < count; i++) {
+      await prisma.user.create({
+        data: {
+          email: `${i}-${faker.internet.email()}`,
+          nickname: `${i}-${faker.internet.userName()}`,
+          password: faker.internet.password(),
+        },
+      });
+    }
+
+    return res.json();
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json(err);
+  }
+});
 
 interface ICreateUserRequest extends Request {
   body: { email: string; nickname: string; password: string };
@@ -23,6 +50,8 @@ app.post('/', async (req: ICreateUserRequest, res) => {
 
     return res.json(createdUser);
   } catch (err) {
+    console.error(err);
+
     return res.status(500).json(err);
   }
 });
@@ -33,6 +62,26 @@ app.get('/', async (req, res) => {
 
     return res.json({ users });
   } catch (err) {
+    console.error(err);
+
+    return res.status(500).json(err);
+  }
+});
+
+interface IFindUserRequest extends Request {
+  params: { id: string };
+}
+
+app.get('/:id', async (req: IFindUserRequest, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+
+    return res.json({ user });
+  } catch (err) {
+    console.error(err);
+
     return res.status(500).json(err);
   }
 });
@@ -51,6 +100,8 @@ app.put('/:id', async (req: IUpdateUserRequest, res) => {
 
     return res.send();
   } catch (err) {
+    console.error(err);
+
     return res.status(500).json(err);
   }
 });
@@ -67,6 +118,8 @@ app.delete('/:id', async (req: IDeleteUserRequest, res) => {
 
     return res.send();
   } catch (err) {
+    console.error(err);
+
     return res.status(500).json(err);
   }
 });
