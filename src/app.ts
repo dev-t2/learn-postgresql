@@ -18,15 +18,23 @@ interface ICreateUserRequest extends Request {
 app.post('/', async (req: ICreateUserRequest, res) => {
   const { email, nickname, password } = req.body;
 
-  const user = await prisma.user.create({ data: { email, nickname, password } });
+  try {
+    const createdUser = await prisma.user.create({ data: { email, nickname, password } });
 
-  return res.json(user);
+    return res.json(createdUser);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 });
 
 app.get('/', async (req, res) => {
-  const users = await prisma.user.findMany();
+  try {
+    const users = await prisma.user.findMany();
 
-  return res.json(users);
+    return res.json({ users });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 });
 
 interface IUpdateUserRequest extends Request {
@@ -38,9 +46,29 @@ app.put('/:id', async (req: IUpdateUserRequest, res) => {
   const { id } = req.params;
   const { nickname } = req.body;
 
-  const users = await prisma.user.update({ where: { id: Number(id) }, data: { nickname } });
+  try {
+    await prisma.user.update({ where: { id: Number(id) }, data: { nickname } });
 
-  return res.json(users);
+    return res.send();
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+interface IDeleteUserRequest extends Request {
+  params: { id: string };
+}
+
+app.delete('/:id', async (req: IDeleteUserRequest, res) => {
+  const { id } = req.params;
+
+  try {
+    await prisma.user.delete({ where: { id: Number(id) } });
+
+    return res.send();
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 });
 
 app.use((req, res) => {
