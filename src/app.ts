@@ -40,6 +40,8 @@ app.post('/faker/users', async (req: ICreateFakerUsersRequest, res) => {
   }
 });
 
+const userSelect = { id: true, email: true, nickname: true, createdAt: true, updatedAt: true };
+
 interface ICreateUserRequest extends Request {
   body: { email: string; nickname: string; password: string };
 }
@@ -50,7 +52,7 @@ app.post('/', async (req: ICreateUserRequest, res) => {
   try {
     const createdUser = await prisma.user.create({
       data: { email, nickname, password },
-      select: { id: true, email: true, nickname: true, createdAt: true },
+      select: userSelect,
     });
 
     return res.json(createdUser);
@@ -74,7 +76,7 @@ app.get('/', async (req: IFindUsersRequest, res) => {
         skip: page * 20,
         take: 20,
         orderBy: { updatedAt: 'desc' },
-        select: { id: true },
+        select: userSelect,
       }),
       prisma.user.count(),
     ]);
@@ -99,7 +101,7 @@ app.get('/:id', async (req: IFindUserRequest, res) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: Number(id) },
-      select: { id: true, email: true, nickname: true },
+      select: userSelect,
     });
 
     return res.json({ user });
