@@ -17,6 +17,7 @@
     "arrow-body-style": "off",
     "no-console": "off",
     "no-plusplus": "off",
-    "no-await-in-loop": "off"
+    "no-await-in-loop": "off",
+    "object-curly-newline": "off"
   }
 }

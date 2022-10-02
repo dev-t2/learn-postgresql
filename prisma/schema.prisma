@@ -11,11 +11,13 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(50)
-  nickname String @unique @db.VarChar(30)
-  password String
-  posts    Post[]
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(50)
+  nickname  String   @unique @db.VarChar(30)
+  password  String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
 }
 
 model Post {

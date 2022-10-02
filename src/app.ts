@@ -30,7 +30,9 @@ app.post('/faker/users', async (req: ICreateFakerUsersRequest, res) => {
       });
     }
 
-    return res.json();
+    const userCount = await prisma.user.count();
+
+    return res.json({ userCount });
   } catch (err) {
     console.error(err);
 
@@ -46,7 +48,10 @@ app.post('/', async (req: ICreateUserRequest, res) => {
   const { email, nickname, password } = req.body;
 
   try {
-    const createdUser = await prisma.user.create({ data: { email, nickname, password } });
+    const createdUser = await prisma.user.create({
+      data: { email, nickname, password },
+      select: { id: true, email: true, nickname: true, createdAt: true },
+    });
 
     return res.json(createdUser);
   } catch (err) {
@@ -56,11 +61,27 @@ app.post('/', async (req: ICreateUserRequest, res) => {
   }
 });
 
-app.get('/', async (req, res) => {
-  try {
-    const users = await prisma.user.findMany();
+interface IFindUsersRequest extends Request {
+  query: { page: string | undefined };
+}
 
-    return res.json({ users });
+app.get('/', async (req: IFindUsersRequest, res) => {
+  const page = Number(req.query.page ?? 1) - 1;
+
+  try {
+    const [users, userCount] = await Promise.all([
+      prisma.user.findMany({
+        skip: page * 20,
+        take: 20,
+        orderBy: { updatedAt: 'desc' },
+        select: { id: true },
+      }),
+      prisma.user.count(),
+    ]);
+
+    const maxPage = Math.ceil(userCount / 20);
+
+    return res.json({ users, maxPage });
   } catch (err) {
     console.error(err);
 
@@ -76,7 +97,10 @@ app.get('/:id', async (req: IFindUserRequest, res) => {
   const { id } = req.params;
 
   try {
-    const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
+      select: { id: true, email: true, nickname: true },
+    });
 
     return res.json({ user });
   } catch (err) {
