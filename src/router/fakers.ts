@@ -50,7 +50,9 @@ fakers.post('/', async (req, res) => {
 fakers.post('/hashtags', async (req, res) => {
   try {
     for (let i = 0; i < 1000; i++) {
-      await prisma.hashtag.create({ data: { content: faker.commerce.product() } });
+      const count = Math.round(Math.random() * 100);
+
+      await prisma.hashtag.create({ data: { content: faker.commerce.product(), count } });
     }
 
     const hashtagCount = await prisma.hashtag.count();

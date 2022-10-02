@@ -50,6 +50,7 @@ model Like {
 model Hashtag {
   id        Int      @id @default(autoincrement())
   content   String   @db.VarChar(32)
+  count     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
