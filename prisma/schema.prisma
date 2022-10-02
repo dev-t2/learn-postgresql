@@ -46,3 +46,10 @@ model Like {
 
   @@id([userId, postId])
 }
+
+model Hashtag {
+  id        Int      @id @default(autoincrement())
+  content   String   @db.VarChar(32)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

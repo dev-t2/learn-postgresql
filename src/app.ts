@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import { PrismaClient } from '@prisma/client';
 
-import { fakers, posts, users } from './router';
+import { fakers, hashtags, posts, users } from './router';
 
 const app = express();
 
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 app.use('/fakers', fakers);
 app.use('/users', users);
 app.use('/posts', posts);
+app.use('/hashtags', hashtags);
 
 app.use((req, res) => {
   return res.status(404).send('Not Found');
