@@ -15,5 +15,7 @@
 - [PostgreSQL](https://www.postgresql.org)
   - [Downloads](https://www.postgresql.org/download)
 - [Prisma](https://www.prisma.io)
-  - [Quickstart](https://www.prisma.io/docs/getting-started/quickstart)
   - [Relational databases](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres)
+  - [Connect your database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgres)
+  - [Using Prisma Migrate](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/using-prisma-migrate-typescript-postgres)
+  - [Referential actions](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/referential-actions)
