@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import { PrismaClient } from '@prisma/client';
 
-import { fakersRouter, postsRouter, usersRouter } from './router';
+import { fakers, posts, users } from './router';
 
 const app = express();
 
@@ -17,9 +17,9 @@ app.get('/', (req, res) => {
   res.send('Learn Prisma with Node.js and PostgreSQL');
 });
 
-app.use('/fakers', fakersRouter);
-app.use('/users', usersRouter);
-app.use('/posts', postsRouter);
+app.use('/fakers', fakers);
+app.use('/users', users);
+app.use('/posts', posts);
 
 app.use((req, res) => {
   return res.status(404).send('Not Found');

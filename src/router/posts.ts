@@ -1,5 +1,5 @@
 import { Router } from 'express';
 
-const postsRouter = Router();
+const posts = Router();
 
-export default postsRouter;
+export default posts;

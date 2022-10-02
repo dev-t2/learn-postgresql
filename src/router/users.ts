@@ -2,7 +2,7 @@ import { Request, Router } from 'express';
 
 import { prisma } from '../app';
 
-const usersRouter = Router();
+const users = Router();
 
 const select = { id: true, email: true, nickname: true, createdAt: true, updatedAt: true };
 
@@ -10,7 +10,7 @@ interface ICreateUserRequest extends Request {
   body: { email: string; nickname: string; password: string };
 }
 
-usersRouter.post('/', async (req: ICreateUserRequest, res) => {
+users.post('/', async (req: ICreateUserRequest, res) => {
   const { email, nickname, password } = req.body;
 
   try {
@@ -28,7 +28,7 @@ interface IFindUsersRequest extends Request {
   query: { page: string | undefined };
 }
 
-usersRouter.get('/', async (req: IFindUsersRequest, res) => {
+users.get('/', async (req: IFindUsersRequest, res) => {
   const page = Number(req.query.page ?? 1) - 1;
 
   try {
@@ -51,7 +51,7 @@ interface IFindUserRequest extends Request {
   params: { id: string };
 }
 
-usersRouter.get('/:id', async (req: IFindUserRequest, res) => {
+users.get('/:id', async (req: IFindUserRequest, res) => {
   const { id } = req.params;
 
   try {
@@ -70,7 +70,7 @@ interface IUpdateUserRequest extends Request {
   body: { nickname: string };
 }
 
-usersRouter.put('/:id', async (req: IUpdateUserRequest, res) => {
+users.put('/:id', async (req: IUpdateUserRequest, res) => {
   const { id } = req.params;
   const { nickname } = req.body;
 
@@ -89,7 +89,7 @@ interface IDeleteUserRequest extends Request {
   params: { id: string };
 }
 
-usersRouter.delete('/:id', async (req: IDeleteUserRequest, res) => {
+users.delete('/:id', async (req: IDeleteUserRequest, res) => {
   const { id } = req.params;
 
   try {
@@ -103,4 +103,4 @@ usersRouter.delete('/:id', async (req: IDeleteUserRequest, res) => {
   }
 });
 
-export default usersRouter;
+export default users;

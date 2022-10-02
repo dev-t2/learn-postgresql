@@ -3,13 +3,13 @@ import { faker } from '@faker-js/faker';
 
 import { prisma } from '../app';
 
-const fakersRouter = Router();
+const fakers = Router();
 
 interface ICreateFakerUsersRequest extends Request {
   body: { count: number };
 }
 
-fakersRouter.post('/faker/users', async (req: ICreateFakerUsersRequest, res) => {
+fakers.post('/faker/users', async (req: ICreateFakerUsersRequest, res) => {
   const { count } = req.body;
 
   try {
@@ -33,4 +33,4 @@ fakersRouter.post('/faker/users', async (req: ICreateFakerUsersRequest, res) => 
   }
 });
 
-export default fakersRouter;
+export default fakers;

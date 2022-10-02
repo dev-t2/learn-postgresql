@@ -1,3 +1,3 @@
-export { default as fakersRouter } from './fakers';
-export { default as postsRouter } from './posts';
-export { default as usersRouter } from './users';
+export { default as fakers } from './fakers';
+export { default as posts } from './posts';
+export { default as users } from './users';
