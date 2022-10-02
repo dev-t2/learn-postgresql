@@ -13,7 +13,20 @@ posts.get('/', async (req: IFindPostsRequest, res) => {
 
   try {
     const [posts, postCount] = await Promise.all([
-      prisma.post.findMany({ skip: page * 20, take: 20, orderBy: { updatedAt: 'desc' } }),
+      prisma.post.findMany({
+        skip: page * 20,
+        take: 20,
+        orderBy: { updatedAt: 'desc' },
+        select: {
+          id: true,
+          user: { select: { id: true, email: true, nickname: true } },
+          title: true,
+          image: true,
+          content: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      }),
       prisma.post.count(),
     ]);
 
