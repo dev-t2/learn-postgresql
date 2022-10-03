@@ -1,7 +1,5 @@
 # References
 
-## 1. Node.js
-
 - [Node.js](https://nodejs.org/ko)
 - [npm](https://www.npmjs.com)
 - [ts-node](https://typestrong.org/ts-node)

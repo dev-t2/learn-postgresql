@@ -31,10 +31,10 @@ hashtags.get('/aggregate', async (req, res) => {
   try {
     const result = await prisma.hashtag.aggregate({
       _count: true,
-      _avg: { count: true },
-      _sum: { count: true },
       _min: { count: true },
       _max: { count: true },
+      _sum: { count: true },
+      _avg: { count: true },
     });
 
     return res.json({ result });
@@ -50,6 +50,26 @@ hashtags.get('/distinct', async (req, res) => {
     const result = await prisma.hashtag.findMany({
       orderBy: { updatedAt: 'desc' },
       distinct: ['content'],
+    });
+
+    return res.json({ result });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json(err);
+  }
+});
+
+hashtags.get('/group', async (req, res) => {
+  try {
+    const result = await prisma.hashtag.groupBy({
+      by: ['content'],
+      _count: { _all: true },
+      _sum: { count: true },
+      _min: { count: true },
+      _max: { count: true },
+      _avg: { count: true },
+      having: { count: { _avg: { gt: 55 } } },
     });
 
     return res.json({ result });
