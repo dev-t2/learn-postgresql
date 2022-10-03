@@ -12,6 +12,7 @@
 - [morgan](https://github.com/expressjs/morgan)
 - [PostgreSQL](https://www.postgresql.org)
   - [Downloads](https://www.postgresql.org/download)
+  - [Documentation](https://www.postgresql.org/docs/current)
 - [Prisma](https://www.prisma.io)
   - [Relational databases](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgres)
   - [Connect your database](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-typescript-postgres)
