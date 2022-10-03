@@ -27,4 +27,37 @@ hashtags.get('/', async (req: IFindHashtagsRequest, res) => {
   }
 });
 
+hashtags.get('/aggregate', async (req, res) => {
+  try {
+    const result = await prisma.hashtag.aggregate({
+      _count: true,
+      _avg: { count: true },
+      _sum: { count: true },
+      _min: { count: true },
+      _max: { count: true },
+    });
+
+    return res.json({ result });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json(err);
+  }
+});
+
+hashtags.get('/distinct', async (req, res) => {
+  try {
+    const result = await prisma.hashtag.findMany({
+      orderBy: { updatedAt: 'desc' },
+      distinct: ['content'],
+    });
+
+    return res.json({ result });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json(err);
+  }
+});
+
 export default hashtags;
