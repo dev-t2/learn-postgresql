@@ -16,6 +16,26 @@ const postSelect = {
   updatedAt: true,
 };
 
+interface ICreatePostRequest extends Request {
+  body: { nickname: string; title: string; content: string };
+}
+
+posts.post('/', async (req: ICreatePostRequest, res) => {
+  const { nickname, title, content } = req.body;
+
+  try {
+    const post = await prisma.post.create({
+      data: { title, content, user: { connect: { nickname } } },
+    });
+
+    return res.json({ post });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json(err);
+  }
+});
+
 interface IFindPostsRequest extends Request {
   query: { page: string | undefined };
 }
